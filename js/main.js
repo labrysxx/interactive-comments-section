@@ -5,6 +5,7 @@ fetch('./data.json')
 .then(response => {return response.json()})
 .then(data => {
   db = data.comments
+  db.sort(ordenaDb)
   criaSessao()
 })
 .catch(error => {
@@ -16,7 +17,12 @@ function criaSessao() {
   db.forEach(el => {
     const SESSAO = `
       <section>
-        <header>
+        <div class='up-down-vote'>
+          <button class="upvote-btn">+</button>
+          <span class="score">${el.score}</span>
+          <button class="downvote-btn">-</button>
+        </div>
+        <header class='cabecalho'>
           <img src='${el.user.image.png}'>
           <span class='username'>${el.user.username}</span>
           <span class='createdAt'>${el.createdAt}</span>
@@ -25,12 +31,15 @@ function criaSessao() {
             Reply
           </span>
         </header>
-        <main>
+        <main class='main-content'>
           <p class='comment'>${el.content}</p>
         </main>
       </section>
     `
     MAIN.insertAdjacentHTML('afterbegin', SESSAO)
-    console.log(el)
   })
+}
+
+function ordenaDb(a, b) {
+  return a.score - b.score
 }
