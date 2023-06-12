@@ -35,11 +35,31 @@ function criaSessao() {
           <p class='comment'>${el.content}</p>
         </main>
       </section>
+      <div class='respostas'></div>
     `
     MAIN.insertAdjacentHTML('afterbegin', SESSAO)
+
+    if(el.replies.length !== 0) {
+      console.log(el.replies)
+      const RESPOSTAS_FIELD = document.querySelectorAll('.respostas')
+  
+      el.replies.forEach((resposta) => {
+        for(let j = 0; j < RESPOSTAS_FIELD.length; j++) {
+          const RESPOSTA_DIV = document.createElement('div')
+          RESPOSTA_DIV.classList.add('resposta')
+          RESPOSTA_DIV.textContent = resposta.content
+          RESPOSTAS_FIELD[j].appendChild(RESPOSTA_DIV)
+        }
+      })
+    }
+
   })
 }
 
 function ordenaDb(a, b) {
   return a.score - b.score
+}
+
+function adicionaComentario() {
+
 }

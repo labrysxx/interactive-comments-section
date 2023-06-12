@@ -14,6 +14,7 @@
 
 body {
   font-family: 'Rubik', sans-serif;
+  background-color: var(--light-gray);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -22,9 +23,16 @@ body {
 
 main {
   width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 section {
+  margin-top: 20px;
+  padding: 24px;
+  background-color: var(--white);
   display: grid;
   grid-template-columns: 88px auto;
   grid-template-rows: 71px 96px;
