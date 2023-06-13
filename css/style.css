@@ -22,11 +22,11 @@ body {
 }
 
 main {
-  width: auto;
+  width: min-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 section {
@@ -41,6 +41,11 @@ section {
 
 .main-content {
   grid-column: 2/3;
+  width: auto;
+}
+
+.sub-comment {
+  width: 70%;
 }
 
 .up-down-vote {
