@@ -38,6 +38,10 @@ function atualizaLocalStorage() {
 
 function limpaForm() {
   COMMENT.value = ''
+  const your_comment = document.querySelectorAll('.your-comment')
+  for(let i = 0; i < your_comment.length; i++) {
+    your_comment[i].remove()
+  }
 }
 
 function checaLocalStorage() {
@@ -50,7 +54,7 @@ function carregaComentario() {
   checaLocalStorage()
   comentarios.forEach((comentario) => {
     const htmlComment = `
-      <section class='main-comment'>
+      <section class='main-comment your-comment'>
         <div class='up-down-vote'>
           <button class="upvote-btn">+</button>
           <span class="score">${comentario.score}</span>
