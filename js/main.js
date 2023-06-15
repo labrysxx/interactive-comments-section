@@ -61,7 +61,7 @@ function createSection() {
               </span>
             </header>
             <main class='main-content'>
-              <p class='comment'>${answer.content}</p>
+              <p class='comment-text'><span class='replying-to'>${answer.replyingTo}</span> ${answer.content}</p>
             </main>
           </section>
         `;
