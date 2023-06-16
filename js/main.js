@@ -8,55 +8,8 @@ fetch('./data.json')
   db = data.comments
   createSection()
   const replyButtons = document.querySelectorAll('.reply_field');
-  function addReplyFieldClickListeners() {
-    console.log(replyButtons)
-    replyButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const parentComment = closest(button, '.comment');
-        let replySection = parentComment.nextElementSibling;
-  
-        // salva o nome da pessoa a ser respondida
-        replyingTo = parentComment.children[1].children[1].dataset.name
-  
-        if (replySection && replySection.classList.contains('reply_section')) {
-          // A seção de resposta já existe, então remova-a
-          replySection.remove();
-        } else {
-          // cria a caixa de resposta
-          replySection = document.createElement('section');
-          const form = document.createElement('form');
-          const image = document.createElement('img');
-          const textarea = document.createElement('textarea');
-          const submitButton = document.createElement('input');
-  
-          image.src = './images/avatars/image-juliusomo.png';
-  
-          form.classList.add('make-answer');
-          replySection.classList.add('reply_section');
-          textarea.placeholder = 'Digite a resposta...';
-          submitButton.classList.add('reply-btn')
-          submitButton.value = 'REPLY';
-          submitButton.type = 'submit';
-          textarea.value = `@${replyingTo} `
-  
-          // igualar a largura da caiza de resposta à largura do comentário a ser respondido
-          if (parentComment.classList.contains('sub-comment')) {
-            replySection.classList.add('sub-comment');
-          }
-          
-          form.appendChild(image);
-          form.appendChild(textarea);
-          form.appendChild(submitButton);
-          replySection.appendChild(form);
-  
-          // Inserir a nova seção abaixo do comentário
-          parentComment.insertAdjacentElement('afterend', replySection);
-        }
-      });
-    });
-  }
 
-  addReplyFieldClickListeners()
+  addReplyFieldClickListeners(replyButtons)
 })
 .catch(error => {
   // Trate qualquer erro que ocorrer durante a requisição
@@ -125,4 +78,52 @@ function createSection() {
 
 function ordenaDb(a, b) {
   return a.score - b.score
+}
+
+function addReplyFieldClickListeners(replyButtons) {
+  console.log(replyButtons)
+  replyButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const parentComment = closest(button, '.comment');
+      let replySection = parentComment.nextElementSibling;
+
+      // salva o nome da pessoa a ser respondida
+      replyingTo = parentComment.children[1].children[1].dataset.name
+
+      if (replySection && replySection.classList.contains('reply_section')) {
+        // A seção de resposta já existe, então remova-a
+        replySection.remove();
+      } else {
+        // cria a caixa de resposta
+        replySection = document.createElement('section');
+        const form = document.createElement('form');
+        const image = document.createElement('img');
+        const textarea = document.createElement('textarea');
+        const submitButton = document.createElement('input');
+
+        image.src = './images/avatars/image-juliusomo.png';
+
+        form.classList.add('make-answer');
+        replySection.classList.add('reply_section');
+        textarea.placeholder = 'Digite a resposta...';
+        submitButton.classList.add('reply-btn')
+        submitButton.value = 'REPLY';
+        submitButton.type = 'submit';
+        textarea.value = `@${replyingTo} `
+
+        // igualar a largura da caiza de resposta à largura do comentário a ser respondido
+        if (parentComment.classList.contains('sub-comment')) {
+          replySection.classList.add('sub-comment');
+        }
+        
+        form.appendChild(image);
+        form.appendChild(textarea);
+        form.appendChild(submitButton);
+        replySection.appendChild(form);
+
+        // Inserir a nova seção abaixo do comentário
+        parentComment.insertAdjacentElement('afterend', replySection);
+      }
+    });
+  });
 }
