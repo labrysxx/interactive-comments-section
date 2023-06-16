@@ -36,7 +36,7 @@ section {
   background-color: var(--white);
   display: grid;
   grid-template-columns: 65px auto;
-  grid-template-rows: 71px auto;
+  grid-template-rows: 59px auto;
   width: 730px;
 }
 
@@ -93,13 +93,20 @@ form {
 input {
   cursor: pointer;
   border: none;
-  height: 30%;
-  width: 10%;
-  background-color: var(--moderate-blue);
   font-weight: bold;
+  background-color: var(--moderate-blue);
   color: var(--white);
   border-radius: 10px;
   margin-left: 16px;
+}
+
+.send-btn {
+  height: 30%;
+  width: 22%;
+}
+
+.send-btn:hover, .reply-btn:hover {
+  background-color: var(--light-grayish-blue);
 }
 
 button {
@@ -175,11 +182,6 @@ textarea:focus {
   border-radius: 10px;
 }
 
-.reply_section img {
-  grid-row: 1/2;
-  grid-column: 1/2;
-}
-
 .score {
   color: var(--moderate-blue);
   font-weight: bold;
@@ -190,6 +192,12 @@ textarea:focus {
   font-weight: bold;
   font-size: 20px;
 }
+
+.reply-btn {
+  width: 40%;
+  height: 70%;
+}
+
 .username {
   color: var(--dark-blue);
   font-weight: bold;
