@@ -88,12 +88,12 @@ function loadComment() {
       </section>
     `;
     main.insertAdjacentHTML("beforeend", htmlComment);
-    replyButtons = document.querySelectorAll('.reply_field');
-    addReplyFieldClickListeners();
   })
 }
 
 function addReplyFieldClickListeners() {
+  replyButtons = document.querySelectorAll('.reply_field');
+  console.log(replyButtons)
   replyButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const parentComment = closest(button, '.comment');
@@ -140,3 +140,4 @@ function addReplyFieldClickListeners() {
 }
 
 loadComment()
+addReplyFieldClickListeners()
