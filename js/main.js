@@ -80,6 +80,13 @@ function ordenaDb(a, b) {
   return a.score - b.score
 }
 
+function closest(element, selector) {
+  while (element && !element.matches(selector)) {
+    element = element.parentElement;
+  }
+  return element;
+}
+
 function addReplyFieldClickListeners(replyButtons) {
   console.log(replyButtons)
   replyButtons.forEach((button) => {

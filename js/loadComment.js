@@ -53,13 +53,6 @@ function checkLocalStorage() {
   }
 }
 
-function closest(element, selector) {
-  while (element && !element.matches(selector)) {
-    element = element.parentElement;
-  }
-  return element;
-}
-
 function loadComment() {
   checkLocalStorage()
   comments.forEach((comment) => {
