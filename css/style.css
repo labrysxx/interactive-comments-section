@@ -120,7 +120,6 @@ button {
 
 textarea {
   width: 100%;
-
   resize: none;
   border: 1px solid var(--moderate-blue);
   border-radius: 20px;
@@ -141,17 +140,22 @@ textarea:focus {
   grid-template-columns: 65px auto 90px;
 }
 
-.new-comment textarea{
-  grid-column: 1/3;
-  grid-row: 1/3;
-}
-
 .comment, .new-comment, .comment_field, .reply_section {
   border-radius: 10px;
 }
 
 .comment-text {
   line-height: 30px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 8px;
+  margin-left: 16px;
+}
+
+.textarea:focus {
+  outline: none;
 }
 
 .reply_field {
