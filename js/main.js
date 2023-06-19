@@ -73,16 +73,15 @@ function createComment() {
           </span>
         </header>
         <main class='main-content'>
-          <p class='comment'>${comment.content}</p>
+          <p class='comment-text'>${comment.content}</p>
         </main>
       </section>
     `
     main.insertAdjacentHTML('afterbegin', section)
     if (comment.replies && comment.replies.length > 0) {
-      createAnswer(comment)
+      createAnswer(comment.replies)
     }
     addReplyFieldClickListeners()
-
   })
 }
 
@@ -112,7 +111,7 @@ function checkLocalStorage() {
 
 function createAnswer(el) {
   checkLocalStorage()
-  el.replies.forEach((answer) => {
+  el.forEach((answer) => {
     const answerElement = `
       <section class='sub-comment comment'>
         <div class='up-down-vote'>
@@ -208,6 +207,10 @@ function sendAnswer() {
       const replyingTo = e.target.parentNode.previousElementSibling.children[1].children[1].dataset.name;
       let parentComment = comments.find(comment => comment.user === replyingTo);
 
+      if(e.target.parentNode.previousElementSibling.classList.contains('sub-comment')) {
+        console.log('reply do reply')
+      }
+
       if (parentComment) {
         const content = e.target.children[1].value;
         // Crie um novo objeto Comment para a resposta
@@ -234,6 +237,10 @@ function makeComment() {
   document.querySelector('.make-comment').addEventListener('submit', (e) => {
     e.preventDefault()
     const content = e.target.children[1].value;
+    if(content.length === 0) {
+      alert('Type your comment!')
+      return
+    }
     const newComment = new Comment(content, new Date(), 'everybody', 0, 'juliusomo', [], "./images/avatars/image-juliusomo.png");
 
     // Adicione a resposta ao array de replies do comentário pai
