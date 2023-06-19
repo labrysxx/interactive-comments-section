@@ -203,13 +203,13 @@ function sendAnswer() {
         alert('Answer field is empty, type something!')
         return
       }
-      const content = e.target.children[1].value;
 
       // Encontre o comentário ao qual estamos respondendo
       const replyingTo = e.target.parentNode.previousElementSibling.children[1].children[1].dataset.name;
-      const parentComment = comments.find(comment => comment.user === replyingTo);
-      console.log(comments.find(comment => comment.user === replyingTo))
+      let parentComment = comments.find(comment => comment.user === replyingTo);
+
       if (parentComment) {
+        const content = e.target.children[1].value;
         // Crie um novo objeto Comment para a resposta
         const newAnswer = new Comment(content, new Date(), parentComment.user, 0, 'juliusomo', [], "./images/avatars/image-juliusomo.png");
 
@@ -221,10 +221,32 @@ function sendAnswer() {
 
         // Crie novamente os comentários na tela, incluindo as respostas atualizadas
         createComment(comments);
+        
+        // Limpe o campo de resposta
+        e.target.children[1].value = '';
       }
-
-      // Limpe o campo de resposta
-      e.target.children[1].value = '';
+      
     });
   }
 }
+
+function makeComment() {
+  document.querySelector('.make-comment').addEventListener('submit', (e) => {
+    e.preventDefault()
+    const content = e.target.children[1].value;
+    const newComment = new Comment(content, new Date(), 'everybody', 0, 'juliusomo', [], "./images/avatars/image-juliusomo.png");
+
+    // Adicione a resposta ao array de replies do comentário pai
+    comments.push(newComment);
+
+    // Atualize o armazenamento local
+    updateLocalStorage();
+
+    // Crie novamente os comentários na tela, incluindo as respostas atualizadas
+    createComment(comments);
+
+    e.target.children[1].value = '';
+  })
+}
+
+makeComment()
