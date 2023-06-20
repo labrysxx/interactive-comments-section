@@ -66,7 +66,7 @@ function createComment() {
           <div>
             <img src='${comment.image}'>
             <span class='username'>${comment.user}</span>
-            <span class='createdAt'>${comment.createdAt}</span>
+            <span class='createdAt'>${formatTimeAgo(comment.createdAt)}</span>
           </div>
           ${
             comment.user === 'juliusomo'
@@ -101,7 +101,7 @@ function createComment() {
 class Comment {
   constructor(content, createdAt, replyingTo, score, user, replies, image) {
     this.content = content,
-    this.createdAt = createdAt,
+    this.createdAt = new Date(createdAt),
     this.score = score,
     this.replyingTo = replyingTo
     this.user = user,
@@ -109,6 +109,54 @@ class Comment {
     this.image = image
   }
 }
+
+function formatTimeAgo(createdAt) {
+  const currentDate = new Date();
+  let commentDate;
+
+  if (createdAt.endsWith("ago")) {
+    const timeAgo = createdAt.split(" ");
+    const value = parseInt(timeAgo[0]);
+    const unit = timeAgo[1];
+
+    commentDate = new Date();
+
+    if (unit.includes("second"))
+      commentDate.setSeconds(commentDate.getSeconds() - value);
+    else if (unit.includes("minute"))
+      commentDate.setMinutes(commentDate.getMinutes() - value);
+    else if (unit.includes("hour"))
+      commentDate.setHours(commentDate.getHours() - value);
+    else if (unit.includes("day"))
+      commentDate.setDate(commentDate.getDate() - value);
+    else if (unit.includes("week"))
+      commentDate.setDate(commentDate.getDate() - value * 7);
+    else if (unit.includes("month"))
+      commentDate.setMonth(commentDate.getMonth() - value);
+  } else {
+    commentDate = new Date(createdAt);
+  }
+
+  const timeDifference = currentDate.getTime() - commentDate.getTime();
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+
+  if (weeks > 0) {
+    return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+  } else if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+  }
+}
+
 
 function updateLocalStorage() {
   localStorage.setItem('comments', JSON.stringify(comments))
@@ -136,7 +184,7 @@ function createAnswer(el) {
           <div>
             <img src='${answer.image}'>
             <span class='username'>${answer.user}</span>
-            <span class='createdAt'>${answer.createdAt}</span>
+            <span class='createdAt'>${formatTimeAgo(answer.createdAt)}</span>
           </div>
           ${
             answer.user === 'juliusomo'
@@ -336,7 +384,7 @@ function createReplyReply() {
                     <div>
                       <img src='${answer.image}'>
                       <span class='username'>${answer.user}</span>
-                      <span class='createdAt'>${answer.createdAt}</span>
+                      <span class='createdAt'>${formatTimeAgo(answer.createdAt)}</span>
                     </div>
                     ${
                       answer.user === 'juliusomo'
