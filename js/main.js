@@ -47,6 +47,7 @@ let reply_btns
 
 window.addEventListener('DOMContentLoaded', () => {
   createComment()
+  createReplyReply()
 })
 
 function createComment() {
@@ -279,6 +280,7 @@ function makeComment() {
     createComment(comments);
 
     e.target.children[1].value = '';
+    createReplyReply()
   })
 }
 
