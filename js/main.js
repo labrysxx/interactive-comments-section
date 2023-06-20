@@ -50,9 +50,9 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 function createComment() {
-  checkLocalStorage()
-  main.innerHTML = ''
-  comments.sort(ordenaDb)
+  checkLocalStorage();
+  main.innerHTML = '';
+  comments.sort(ordenaDb);
   comments.forEach((comment) => {
     const section = `
       <section class='main-comment comment'>
@@ -67,23 +67,35 @@ function createComment() {
             <span class='username'>${comment.user}</span>
             <span class='createdAt'>${comment.createdAt}</span>
           </div>
-          <span class='reply_field' data-name='${comment.user}'>
-            <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
-            Reply
-          </span>
+          ${
+            comment.user === 'juliusomo'
+              ? `
+                <div class='edit-delete-buttons'>
+                  <button class='edit-btn btn'><svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>Edit</button>
+                  <button class='delete-btn btn'><svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>Delete</button>
+                </div>
+              `
+              : `
+                <span class='reply_field' data-name='${comment.user}'>
+                  <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
+                  Reply
+                </span>
+              `
+          }
         </header>
         <main class='main-content'>
           <p class='comment-text'>${comment.content}</p>
         </main>
       </section>
-    `
-    main.insertAdjacentHTML('afterbegin', section)
+    `;
+    main.insertAdjacentHTML('afterbegin', section);
     if (comment.replies && comment.replies.length > 0) {
-      createAnswer(comment.replies)
+      createAnswer(comment.replies);
     }
-    addReplyFieldClickListeners()
-  })
+    addReplyFieldClickListeners();
+  });
 }
+
 
 class Comment {
   constructor(content, createdAt, replyingTo, score, user, replies, image) {
@@ -125,10 +137,21 @@ function createAnswer(el) {
             <span class='username'>${answer.user}</span>
             <span class='createdAt'>${answer.createdAt}</span>
           </div>
-          <span class='reply_field' data-name='${answer.user}'>
-            <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
-            Reply
-          </span>
+          ${
+            answer.user === 'juliusomo'
+              ? `
+                <div class='edit-delete-buttons'>
+                  <button class='edit-btn btn'><svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>Edit</button>
+                  <button class='delete-btn btn'><svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>Delete</button>
+                </div>
+              `
+              : `
+                <span class='reply_field' data-name='${answer.user}'>
+                  <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
+                  Reply
+                </span>
+              `
+          }
         </header>
         <main class='main-content'>
           <p class='comment-text'><span class='replying-to'>${answer.replyingTo}</span> ${answer.content}</p>
@@ -193,6 +216,7 @@ function replyFieldClickHandler() {
   }
 }
 
+// imprime na tela a resposta feita a algum comentário
 function sendAnswer() {
   const forms = document.querySelectorAll('.make-answer')
   for (let i = 0; i < forms.length; i++) {
@@ -207,8 +231,9 @@ function sendAnswer() {
       const replyingTo = e.target.parentNode.previousElementSibling.children[1].children[1].dataset.name;
       let parentComment = comments.find(comment => comment.user === replyingTo);
 
+      // verifica se o comentário respondido já é uma resposta
       if(e.target.parentNode.previousElementSibling.classList.contains('sub-comment')) {
-        console.log('reply do reply')
+        saveReplyReply(e)
       }
 
       if (parentComment) {
@@ -228,11 +253,12 @@ function sendAnswer() {
         // Limpe o campo de resposta
         e.target.children[1].value = '';
       }
-      
+      createReplyReply()
     });
   }
 }
 
+// faz um comentário geral
 function makeComment() {
   document.querySelector('.make-comment').addEventListener('submit', (e) => {
     e.preventDefault()
@@ -257,3 +283,102 @@ function makeComment() {
 }
 
 makeComment()
+
+// salva o comentário feito à uma resposta nos replies dela 
+function saveReplyReply(info) {
+  const replyingTo = info.target.parentNode.previousElementSibling.children[1].children[1].dataset.name;
+  let parentComment;
+
+  comments.forEach((comment) => {
+    if (comment.replies && comment.replies.length > 0) {
+      comment.replies.forEach((reply) => {
+        if (reply.user === replyingTo) {
+          parentComment = reply;
+        }
+      });
+    }
+  });
+
+  if (parentComment) {
+    const content = info.target.children[1].value;
+    const newReply = new Comment(content, new Date(), replyingTo, 0, 'juliusomo', [], "./images/avatars/image-juliusomo.png")
+
+    parentComment.replies.push(newReply);
+    updateLocalStorage();
+    info.target.children[1].value = '';
+    createComment();
+  }
+}
+
+// adiciona o replie do replie abaixo da resposta respectiva
+function createReplyReply() {
+  const parentCommentElements = document.querySelectorAll('.comment');
+  
+  for (let i = 0; i < comments.length; i++) {
+    if (comments[i].replies && comments[i].replies.length > 0) {
+      for (let j = 0; j < comments[i].replies.length; j++) {
+        const reply = comments[i].replies[j];
+        if (reply.replies && reply.replies.length > 0) {
+          for (let k = 0; k < reply.replies.length; k++) {
+            const answer = reply.replies[k];
+            const parentCommentElement = findParentCommentElement(parentCommentElements, reply.user);
+            if (parentCommentElement) {
+              const answerElement = `
+                <section class='sub-comment comment'>
+                  <div class='up-down-vote'>
+                    <button class="upvote-btn">+</button>
+                    <span class="score">${answer.score}</span>
+                    <button class="downvote-btn">-</button>
+                  </div>
+                  <header class='cabecalho'>
+                    <div>
+                      <img src='${answer.image}'>
+                      <span class='username'>${answer.user}</span>
+                      <span class='createdAt'>${answer.createdAt}</span>
+                    </div>
+                    ${
+                      answer.user === 'juliusomo'
+                        ? `
+                          <div class='edit-delete-buttons'>
+                            <button class='edit-btn btn'><svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>Edit</button>
+                            <button class='delete-btn btn'><svg width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>Delete</button>
+                          </div>
+                        `
+                        : `
+                          <span class='reply_field' data-name='${answer.user}'>
+                            <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg"><path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" fill="#5357B6"/></svg>
+                            Reply
+                          </span>
+                        `
+                    }
+                  </header>
+                  <main class='main-content'>
+                    <p class='comment-text'><span class='replying-to'>${answer.replyingTo}</span> ${answer.content}</p>
+                  </main>
+                </section>
+              `;
+              parentCommentElement.insertAdjacentHTML('afterend', answerElement);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// verifica se o nome do usuário sendo respondido corresponde a algum dos comentários dispostos na tela. Se houver correspondência, o elemento HTML do comentário pai é retornado. 
+function findParentCommentElement(parentCommentElements, replyingTo) {
+  for (let i = 0; i < parentCommentElements.length; i++) {
+    const parentCommentElement = parentCommentElements[i];
+    const replyingToElement = parentCommentElement.querySelector('.username');
+    if (replyingToElement && replyingToElement.textContent === replyingTo) {
+      return parentCommentElement;
+    }
+  }
+  return null;
+}
+
+
+
+
+

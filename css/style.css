@@ -158,6 +158,35 @@ textarea:focus {
   outline: none;
 }
 
+.btn {
+  border: none;
+  background-color: transparent;
+}
+
+.edit-btn {
+  color: var(--moderate-blue);
+}
+
+.edit-btn:hover svg path{
+  fill: var(--light-grayish-blue);
+}
+
+.edit-btn:hover {
+  color: var(--light-grayish-blue);
+}
+
+.delete-btn {
+  color: var(--soft-red);
+}
+
+.delete-btn:hover {
+  color: var(--pale-red);
+}
+
+.delete-btn:hover svg path {
+  fill: var(--pale-red);
+}
+
 .reply_field {
   color: var(--moderate-blue);
   font-weight: bold;
