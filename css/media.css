@@ -33,4 +33,8 @@
     .main-content {
         grid-column: 1/3;
     }
+
+    .downvote-btn, .upvote-btn {
+        transform: rotate(90deg)
+    }
 }
