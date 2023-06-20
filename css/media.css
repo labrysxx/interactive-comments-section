@@ -1,0 +1,17 @@
+@media screen and (min-width: 360px) and (max-width: 480px) {
+    section {
+        width: auto;
+    }
+
+    .sub-comment {
+        width: 85%;
+    }
+
+    .reply_field {
+        margin-left: 10px;
+    }
+
+    .edit-delete-buttons {
+        margin-left: 10px;
+    }
+}
