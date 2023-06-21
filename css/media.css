@@ -9,12 +9,16 @@
         width: 80%;
     }
 
+    .sub-comment .reply_field {
+        margin-left: 16px;
+    }
+
     .reply_field {
         margin-left: 45px;
     }
 
     .edit-delete-buttons {
-        margin-left: 18px;;
+        margin-left: 12px;;
     }
 
     .up-down-vote {
