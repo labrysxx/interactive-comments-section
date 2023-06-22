@@ -50,6 +50,32 @@ window.addEventListener('DOMContentLoaded', () => {
   createReplyReply()
 })
 
+function setLikeCounter() {
+  const counters = document.querySelectorAll('.up-down-vote');
+
+  for (count of counters) {
+    count.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (e.target.classList.contains('upvote-btn')) {
+        let scoreElement = e.target.nextElementSibling;
+        if (scoreElement) {
+          let score = parseInt(scoreElement.innerText);
+          score += 1;
+          scoreElement.innerHTML = score;
+        }
+      } else if (e.target.classList.contains('downvote-btn')) {
+        let scoreElement = e.target.previousElementSibling;
+        if (scoreElement) {
+          let score = parseInt(scoreElement.innerText);
+          score -= 1;
+          scoreElement.innerHTML = score;
+        }
+      }
+    });
+  }
+}
+
+
 function createComment() {
   checkLocalStorage();
   main.innerHTML = '';
@@ -414,6 +440,7 @@ function createReplyReply() {
       }
     }
   }
+  setLikeCounter()
 }
 
 // verifica se o nome do usuário sendo respondido corresponde a algum dos comentários dispostos na tela. Se houver correspondência, o elemento HTML do comentário pai é retornado. 
