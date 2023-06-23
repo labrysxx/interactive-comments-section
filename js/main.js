@@ -54,27 +54,39 @@ function setLikeCounter() {
   const counters = document.querySelectorAll('.up-down-vote');
 
   for (count of counters) {
+    let userLiked = false; // variável para controlar se o usuário já clicou em "like"
+    let userDisliked = false; // variável para controlar se o usuário já clicou em "dislike"
+
     count.addEventListener('click', (e) => {
       e.preventDefault();
       if (e.target.classList.contains('upvote-btn')) {
-        let scoreElement = e.target.nextElementSibling;
-        if (scoreElement) {
-          let score = parseInt(scoreElement.innerText);
-          score += 1;
-          scoreElement.innerHTML = score;
+        if (!userLiked) { // verifica se o usuário ainda não clicou em "like"
+          let scoreElement = e.target.nextElementSibling;
+          if (scoreElement) {
+            let score = parseInt(scoreElement.innerText);
+            score += 1;
+            scoreElement.innerHTML = score;
+            userLiked = true; //marca que o usuário já clicou em "like"
+            userDisliked = false; //reseta a marcação de "dislike"
+          }
         }
       } else if (e.target.classList.contains('downvote-btn')) {
-        let scoreElement = e.target.previousElementSibling;
-        if (scoreElement) {
-          let score = parseInt(scoreElement.innerText);
-          score -= 1;
-          scoreElement.innerHTML = score;
+        if (!userDisliked) { // verifica se o usuário ainda não clicou em "dislike"
+          let scoreElement = e.target.previousElementSibling;
+          if (scoreElement) {
+            let score = parseInt(scoreElement.innerText);
+            if (score > 0) { // verifica se o score é maior que zero
+              score -= 1;
+              scoreElement.innerHTML = score;
+            }
+            userDisliked = true; // marca que o usuário já clicou em "dislike"
+            userLiked = false; // reseta a marcação de "like"
+          }
         }
       }
     });
   }
 }
-
 
 function createComment() {
   checkLocalStorage();
