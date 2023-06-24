@@ -47,7 +47,7 @@ section {
   justify-content: start;
 }
 
-.username, .createdAt {
+.username, .createdAt, .username-you {
   margin-left: 16px;
 }
 
@@ -159,6 +159,7 @@ textarea:focus {
 }
 
 .btn {
+  font-size: medium;
   border: none;
   background-color: transparent;
 }
@@ -231,7 +232,18 @@ textarea:focus {
   height: 70%;
 }
 
-.username {
+.username, .username-you {
   color: var(--dark-blue);
   font-weight: bold;
+}
+
+.username-you::after {
+  font-weight: 400;
+  content: "you";
+  color: var(--white);
+  background-color: var(--moderate-blue);
+  padding: .2rem;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+  border-radius: 2px;
 }

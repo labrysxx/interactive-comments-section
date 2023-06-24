@@ -18,7 +18,10 @@
     }
 
     .edit-delete-buttons {
-        margin-left: 12px;;
+        margin-left: 12px;
+        grid-column: 2/3;
+        grid-row: 2/3;
+        display: flex;
     }
 
     .up-down-vote {

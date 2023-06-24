@@ -103,7 +103,14 @@ function createComment() {
         <header class='cabecalho'>
           <div>
             <img src='${comment.image}'>
-            <span class='username'>${comment.user}</span>
+            ${comment.user === 'juliusomo'
+            ? `
+                <span class='username-you'>${comment.user}</span>
+              `
+            : `
+                <span class='username'>${comment.user}</span>
+              `
+            }
             <span class='createdAt'>${formatTimeAgo(comment.createdAt)}</span>
           </div>
           ${
@@ -218,10 +225,17 @@ function createAnswer(el) {
           <span class="score">${answer.score}</span>
           <button class="downvote-btn">-</button>
         </div>
-        <header class='cabecalho'>
+        <header class='cabecalho' data-name='${answer.user}'>
           <div>
             <img src='${answer.image}'>
-            <span class='username'>${answer.user}</span>
+            ${answer.user === 'juliusomo'
+              ? `
+                <span class='username-you'>${answer.user}</span>
+              `
+              : `
+                <span class='username'>${answer.user}</span>
+              `
+            }
             <span class='createdAt'>${formatTimeAgo(answer.createdAt)}</span>
           </div>
           ${
@@ -241,7 +255,7 @@ function createAnswer(el) {
           }
         </header>
         <main class='main-content'>
-          <p class='comment-text'><span class='replying-to'>${answer.replyingTo}</span> ${answer.content}</p>
+          <p class='comment-text'><span class='replying-to'>@${answer.replyingTo}</span> ${answer.content}</p>
         </main>
       </section>
     `;
@@ -418,10 +432,17 @@ function createReplyReply() {
                     <span class="score">${answer.score}</span>
                     <button class="downvote-btn">-</button>
                   </div>
-                  <header class='cabecalho'>
+                  <header class='cabecalho' data-name='${answer.user}'>
                     <div>
                       <img src='${answer.image}'>
-                      <span class='username'>${answer.user}</span>
+                      ${answer.user === 'juliusomo'
+                      ? `
+                        <span class='username-you'>${answer.user}</span>
+                      `
+                          : `
+                        <span class='username'>${answer.user}</span>
+                      `
+                      }
                       <span class='createdAt'>${formatTimeAgo(answer.createdAt)}</span>
                     </div>
                     ${
@@ -441,7 +462,7 @@ function createReplyReply() {
                     }
                   </header>
                   <main class='main-content'>
-                    <p class='comment-text'><span class='replying-to'>${answer.replyingTo}</span> ${answer.content}</p>
+                    <p class='comment-text'><span class='replying-to'>@${answer.replyingTo}</span> ${answer.content}</p>
                   </main>
                 </section>
               `;
@@ -467,6 +488,36 @@ function findParentCommentElement(parentCommentElements, replyingTo) {
   return null;
 }
 
+/*function editComment() {
+  const edit_btns = document.querySelectorAll('.edit-btn')
+  for(btn of edit_btns) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault()
+      console.log(e.target.parentNode.parentNode.dataset.name)
+      const editWho = e.target.parentNode.parentNode.dataset.name
+      let parentComment;
+
+      comments.forEach((comment) => {
+        if (comment.replies && comment.replies.length > 0) {
+          comment.replies.forEach((reply) => {
+            if (reply.user === editWho) {
+              parentComment = reply;
+            }
+          });
+        }
+      });
+
+      if (parentComment) {
+        const content = e.target.parentNode.parentNode.parentNode.children[2].querySelector('.comment-text');
+        const newReply = new Comment(content, new Date(), editWho, 0, 'juliusomo', [], "./images/avatars/image-juliusomo.png")
+
+        parentComment.replies.push(newReply);
+        updateLocalStorage();
+        createComment();
+      }
+    })
+  }
+}*/
 
 
 

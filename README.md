@@ -25,8 +25,8 @@ Users should be able to:
 
 - [x] View the optimal layout for the app depending on their device's screen size :heavy_check_mark:
 - [x] See hover states for all interactive elements on the page :heavy_check_mark:
-- [ ] Create, Read, Update, and Delete comments and replies :construction:
-- [ ] Upvote and downvote comments :construction:
+- [ ] Update and Delete comments and replies :construction:
+- [x] Upvote and downvote comments :heavy_check_mark:
 - [x] **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed. :heavy_check_mark:
 - [x] **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted. :heavy_check_mark:
 
